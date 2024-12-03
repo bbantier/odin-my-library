@@ -133,3 +133,9 @@ body {
   grid-auto-flow: column;
   gap: 8px;
 }
+
+.delete-button,
+.read-button {
+  cursor: pointer;
+  width: 25px;
+}

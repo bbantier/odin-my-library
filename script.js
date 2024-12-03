@@ -1,4 +1,11 @@
-const myLibrary = [];
+const myLibrary = [
+  {
+    title: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    pages: 295,
+    read: true,
+  }
+];
 const titleInput = document.querySelector("#title");
 const authorInput = document.querySelector("#author");
 const pagesInput = document.querySelector("#pages");
@@ -23,14 +30,21 @@ function updateUi() {
     element.remove();
   });
 
-  myLibrary.forEach((book) => {
+  myLibrary.forEach((book, index) => {
     const bookRow = document.createElement("tr");
     bookRow.classList.add("book-row");
+    bookRow.setAttribute("id", `book-${index}`);
     bookRow.innerHTML += `
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.pages}</td>
       <td>${book.read === true ? "yes" : "no"}</td>
+      <td>
+        <img class="delete-button" src="assets/icons/delete.svg">
+      </td>
+      <td>
+        <img class="read-button" src="assets/icons/check.svg">
+      </td>
     `;
     bookTable.appendChild(bookRow);
   });
