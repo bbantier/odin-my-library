@@ -26,7 +26,7 @@ function updateUi() {
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.pages}</td>
-      <td>${book.read}</td>
+      <td>${book.read === true ? "yes" : "no"}</td>
     `;
     bookTable.appendChild(bookRow);
   });
@@ -35,5 +35,19 @@ function updateUi() {
 document.addEventListener("DOMContentLoaded", () => updateUi());
 
 const newBookButton = document.querySelector("#new-book-button");
+const newBookModal = document.querySelector("#new-book-modal");
+const cancelButton = document.querySelector("#cancel-button");
 
-newBookButton.addEventListener("click", () => addBookToLibrary());
+newBookButton.addEventListener("click", () => {
+  newBookModal.style.display = "block";
+})
+
+cancelButton.addEventListener("click", () => {
+  newBookModal.style.display = "none";
+})
+
+window.addEventListener("click", (event) => {
+  if (event.target === newBookModal) {
+    newBookModal.style.display = "none";
+  }
+})
