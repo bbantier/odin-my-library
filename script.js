@@ -64,11 +64,11 @@ addButton.addEventListener("click", (event) => {
   const title = titleInput.value;
   const author = authorInput.value;
   const pages = Number(pagesInput.value);
-  const read = (readInput.value = "on" ? true : false);
+  const read = (readInput.checked ? true : false);
 
   addBookToLibrary(title, author, pages, read);
   updateUi();
-
+  resetForm();
   newBookModal.style.display = "none";
 });
 
@@ -101,11 +101,19 @@ function allowMarkAsRead() {
   const readButton = document.querySelectorAll(".read-button");
   readButton.forEach((button) => {
     button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      event.stopImmediatePropagation();
       const bookId = event.target.parentNode.parentNode
         .getAttribute("id")
         .slice(-1);
       myLibrary[bookId].markAsRead();
+      console.log(bookId);
       updateUi();
     })
   })
+}
+
+function resetForm() {
+  const newBookForm = document.querySelector(".new-book-form");
+  newBookForm.reset();
 }
