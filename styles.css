@@ -138,4 +138,19 @@ body {
 .read-button {
   cursor: pointer;
   width: 25px;
+  border-radius: 5px;
+}
+
+.delete-button:hover {
+  backdrop-filter: brightness(0) saturate(100%) invert(25%) sepia(60%)
+    saturate(1705%) hue-rotate(332deg) brightness(98%) contrast(109%);
+  filter: invert(91%) sepia(8%) saturate(139%) hue-rotate(195deg)
+    brightness(104%) contrast(93%);
+}
+
+.read-button:hover {
+  filter: invert(91%) sepia(8%) saturate(139%) hue-rotate(195deg)
+    brightness(104%) contrast(93%);
+  backdrop-filter: invert(57%) sepia(89%) saturate(431%) hue-rotate(66deg)
+    brightness(85%) contrast(86%);
 }

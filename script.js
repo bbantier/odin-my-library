@@ -1,11 +1,5 @@
-const myLibrary = [
-  {
-    title: "The Hobbit",
-    author: "J.R.R. Tolkien",
-    pages: 295,
-    read: true,
-  }
-];
+const myLibrary = [];
+
 const titleInput = document.querySelector("#title");
 const authorInput = document.querySelector("#author");
 const pagesInput = document.querySelector("#pages");
@@ -16,6 +10,10 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
+}
+
+Book.prototype.markAsRead = function() {
+  this.read = !this.read;
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -40,13 +38,13 @@ function updateUi() {
       <td>${book.pages}</td>
       <td>${book.read === true ? "yes" : "no"}</td>
       <td>
-        <img class="delete-button" src="assets/icons/delete.svg">
-      </td>
-      <td>
-        <img class="read-button" src="assets/icons/check.svg">
+        <img alt="delete" class="delete-button" src="assets/icons/delete.svg">
+        <img alt="mark as read" class="read-button" src="assets/icons/check.svg">
       </td>
     `;
     bookTable.appendChild(bookRow);
+    allowDelete();
+    allowMarkAsRead();
   });
 }
 
@@ -83,3 +81,31 @@ window.addEventListener("click", (event) => {
     newBookModal.style.display = "none";
   }
 });
+
+function allowDelete() {
+  const deleteButton = document.querySelectorAll(".delete-button");
+  deleteButton.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      if (confirm("Are your sure you want to remove that book?")) {
+        const bookId = event.target.parentNode.parentNode
+          .getAttribute("id")
+          .slice(-1);
+        myLibrary.splice(bookId, 1);
+        updateUi();
+      }
+    });
+  });
+}
+
+function allowMarkAsRead() {
+  const readButton = document.querySelectorAll(".read-button");
+  readButton.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const bookId = event.target.parentNode.parentNode
+        .getAttribute("id")
+        .slice(-1);
+      myLibrary[bookId].markAsRead();
+      updateUi();
+    })
+  })
+}
