@@ -5,15 +5,19 @@ const authorInput = document.querySelector("#author");
 const pagesInput = document.querySelector("#pages");
 const readInput = document.querySelector("#read");
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+class Book {
 
-Book.prototype.markAsRead = function() {
-  this.read = !this.read;
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  markAsRead() {
+    this.read = !this.read;
+  }
+
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -107,7 +111,6 @@ function allowMarkAsRead() {
         .getAttribute("id")
         .slice(-1);
       myLibrary[bookId].markAsRead();
-      console.log(bookId);
       updateUi();
     })
   })
